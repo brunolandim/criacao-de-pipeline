@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        # Faz o checkout do repositório para que o job possa acessá-lo
+
+      - name: Install Dependencies
+        run: yarn install
+        # Instala as dependências do projeto usando o comando yarn install
+
+      - name: Build and test
+        run: |
+          yarn build
+          yarn test 
+        # Executa o processo de compilação do projeto usando o comando yarn build
+        # Executa os testes do projeto usando o comando yarn test
