@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  
   push:
     branches:
       - main
@@ -9,6 +10,10 @@ on:
     branches:
       - main
       - develop
+    paths-ignore:
+        - '**.md' # Ignora alterações em arquivos Markdown
+        - '**/.github/**' # Ignora alterações na pasta .github
+        - '**/node_modules/**' # Ignora alterações na pasta node_modules
 
 jobs:
   build:
@@ -28,4 +33,13 @@ jobs:
           yarn build
           yarn test 
         # Executa o processo de compilação do projeto usando o comando yarn build
-        # Executa os testes do projeto usando o comando yarn test
+        # Executa os testes do projeto usando o comando yarn 
+
+      - name: Check test results
+        run: |
+          if [ ${{ job.status }} == 'failure' ]; then
+            echo "Tests failed. Preventing push."
+            exit 1
+          else
+            echo "All tests passed. Allowing push."
+          fi
