@@ -1,0 +1,21 @@
+name: Pre-Push
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  pre-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: yarn test

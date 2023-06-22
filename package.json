@@ -5,12 +5,13 @@
   "repository": "git@github.com:brunolandim/criacao-de-pipeline.git",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node ./src/Name.ts",
-    "build": "tsc --outDir build",
+    "dev": "tsx watch src/Name.ts",
+    "build": "tsup src --out-dir build",
     "test": "jest"
   },
   "dependencies": {
-    "eslint": "^8.43.0"
+    "eslint": "^8.43.0",
+    "tsup": "^7.0.0"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
